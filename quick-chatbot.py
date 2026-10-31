@@ -1,0 +1,17 @@
+from google import genai
+import os
+from dotenv import load_dotenv
+load_dotenv()
+client = genai.Client(
+    api_key=os.getenv("API_KEY"))
+
+while True:
+    question = input("You: ")
+
+    if question.lower() == "exit":
+        break
+
+    response = client.models.generate_content(
+        model="gemini-3.8-flash", contents=question)
+
+    print("Gemini: ", response.text)
